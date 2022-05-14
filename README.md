@@ -6,6 +6,8 @@ ASP MVC app that is was assigned. This simple project aims to bring people toget
 ![image](https://user-images.githubusercontent.com/72268734/168378577-5f6489ac-5820-4eb7-b765-14bdbba3b614.png)
 ![image](https://user-images.githubusercontent.com/72268734/168378606-6e2ac7c1-05bc-4616-8cf5-92691072968c.png)
 ![image](https://user-images.githubusercontent.com/72268734/168418280-089696be-7c8a-4778-ac7b-050179c2b641.png)
+![image](https://user-images.githubusercontent.com/72268734/168423811-97fc97ed-048d-457b-bccd-8aa494ff8864.png)
+
 
 Images: https://www.freepik.com/<br />
-Landing template: https://templatemo.com/
+Templates: https://templatemo.com/ , https://codepen.io/
