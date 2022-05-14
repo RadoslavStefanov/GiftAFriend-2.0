@@ -1,11 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Text;
 
 namespace GiftAFriend_2._0.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
+        const string Admin_User_Guid = "fe4153fa-e9eb-4d8c-97b9-23c22b2f1f93";
+        const string Admin_Role_Guid = "537aa283-24e0-47b8-9ae8-a7f3d83a628d";
+        const string User_Role_Guid = "4dcfe457-f582-42bc-8919-64f57629315b";
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -191,6 +196,32 @@ namespace GiftAFriend_2._0.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            var hasher = new PasswordHasher<IdentityUser>();
+            var passHash = hasher.HashPassword(null, "123123");
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("INSERT INTO AspNetUsers(Id, UserName, NormalizedUserName,Email,EmailConfirmed,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,NormalizedEmail,PasswordHash,SecurityStamp)");
+            sb.AppendLine("VALUES(");
+            sb.AppendLine($"'{Admin_User_Guid}'");
+            sb.AppendLine(",'admin@virtus.bg'");
+            sb.AppendLine(",'ADMIN@VIRTUS.BG'");
+            sb.AppendLine(",'admin@virtus.bg'");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(",'ADMIN@VIRTUS.BG'");
+            sb.AppendLine($", '{passHash}'");
+            sb.AppendLine(", ''");
+            sb.AppendLine(")");
+
+            migrationBuilder.Sql(sb.ToString());
+            migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{Admin_Role_Guid}','Admin','ADMIN')");
+            migrationBuilder.Sql($"INSERT INTO AspNetUserRoles (UserId, RoleId) VALUES ('{Admin_User_Guid}','{Admin_Role_Guid}')");
+
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
