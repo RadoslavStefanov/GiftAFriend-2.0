@@ -18,6 +18,12 @@ namespace GiftAFriend_2._0.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            //GuardAgainstUnknown
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
