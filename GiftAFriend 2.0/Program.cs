@@ -10,7 +10,7 @@ builder.Services.AddDbContext<GAFDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<GAFDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -30,6 +30,12 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {context.Request.Path = "/Error/Error404"; await next();}
+});
 
 app.UseRouting();
 
