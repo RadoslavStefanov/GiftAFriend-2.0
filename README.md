@@ -10,4 +10,4 @@ ASP MVC app that is was assigned. This simple project aims to bring people toget
 
 
 Images: https://www.freepik.com/<br />
-Templates: https://templatemo.com/ , https://codepen.io/
+Templates: https://templatemo.com/, https://codepen.io/, https://adminlte.io/
