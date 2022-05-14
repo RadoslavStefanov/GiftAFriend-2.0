@@ -1,5 +1,4 @@
 using GAF.Infrastructure.Data;
-using GiftAFriend_2._0.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

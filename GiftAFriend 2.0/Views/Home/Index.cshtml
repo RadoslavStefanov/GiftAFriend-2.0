@@ -1,8 +1,271 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{Layout = null;}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Template Mo">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <title>Art Factory HTML CSS Template</title>
+<!--
+
+ART FACTORY
+
+https://templatemo.com/tm-537-art-factory
+
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/css/templatemo-art-factory.css">
+    <link rel="stylesheet" type="text/css" href="~/css/owl-carousel.css">
+
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="#" class="logo">GiftAFriend</a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#welcome" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="#about">About</a></li>
+                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
+                            @if(!User.Identity.IsAuthenticated) 
+                            {
+                                <li class="userControlls" style="padding-right: 5px;"> <a class="btn btn-warning" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                                <li class="userControlls" style="padding-left: 5px;"> <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                            }
+                            else
+                            {
+                                <li class="userControlls" style="padding-right: 5px;"> <a class="btn btn-warning" href="/Dashboard">Dashboard</a></li>
+                                <li class="userControlls" style="padding-left: 5px;">
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="btn btn-danger">Log Out</button>
+                                    </form>
+                                </li>
+                                
+                            }
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+    <!-- ***** Welcome Area Start ***** -->
+    <div class="welcome-area" id="welcome">
+
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                        <h1>GiftAFriend is made <strong>for YOU</strong></h1>
+                        <p>This social app will enable you to engage in a lot of fun and exciting activities! </p>
+                        <a href="#about" class="main-button-slider">Find Out More</a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                        <img src="~/img/slider-icon.png" class="rounded img-fluid d-block mx-auto" alt="First Vector Graphic">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+    <!-- ***** Welcome Area End ***** -->
+
+
+    <!-- ***** Features Big Item Start ***** -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                    <img src="~/img/left-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
+                </div>
+                <div class="right-text col-lg-5 col-md-12 col-sm-12 mobile-top-fix">
+                    <div class="left-heading">
+                        <h5>GiftAFriend is a vastly improving platform</h5>
+                    </div>
+                    <div class="left-text">
+                        <p>In the past two years GiftAFriend has accumulated <a href="#">more than 2M worldwide users!</a> Dont wait and join the growing community <br><br>
+                        Our product is not just simple a social app, its a tool as well! You can send and recieve payments, split check and much more.</p>
+                        <a href="#about2" class="main-button">Discover More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hr"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Big Item End ***** -->
+
+
+    <!-- ***** Features Big Item Start ***** -->
+    <section class="section" id="about2">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix">
+                    <div class="left-heading">
+                        <h5>Our main strength</h5>
+                    </div>
+                    <p>We value your time here, so we always add features to make your stay as productive as possible!</p>
+                    <ul>
+                        <li>
+                            <img src="~/img/about-icon-01.png" alt="">
+                            <div class="text">
+                                <h6>Keep track of your spendings and tokens</h6>
+                                <p>You can both use real money or exchange gift tokens. And to keep track of your spendings you recieve dayli reports based on your history.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="~/img/about-icon-02.png" alt="">
+                            <div class="text">
+                                <h6>Instant meet up feature</h6>
+                                <p>Ever had a friend search for the specific meet up spot? Well this problem is no more. Once going out you can ping your location for your friend to find.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="~/img/about-icon-03.png" alt="">
+                            <div class="text">
+                                <h6>Connectivity</h6>
+                                <p>Send/Recieve gifts, communicate, share your experiences. You can do all that here. Yeah.... in one place. How grate is that?</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                    <img src="~/img/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Big Item End ***** -->
+
+    <!-- ***** Contact Us Start ***** -->
+    <section class="section" id="contact-us">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- ***** Contact Map Start ***** -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div id="map">
+                      <!-- How to change your own map point
+                           1. Go to Google Maps
+                           2. Click on your location point
+                           3. Click "Share" and choose "Embed map" tab
+                           4. Copy only URL and paste it within the src="" field below
+                    -->
+                    <iframe src="https://maps.google.com/maps?q=Kindness%20House,%20Chesapeake%20Road,%20Landover%20Hills,%20MD,%20USA&t=&z=9&ie=UTF8&iwloc=&output=embed" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- ***** Contact Map End ***** -->
+
+                <!-- ***** Contact Form Start ***** -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="name" type="text" id="name" placeholder="Full Name" required="" class="contact-field">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="email" type="text" id="email" placeholder="E-mail" required="" class="contact-field">
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <textarea name="message" rows="6" id="message" placeholder="Your Message" required="" class="contact-field"></textarea>
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="main-button">Send It</button>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- ***** Contact Form End ***** -->
+            </div>
+        </div>
+    </section>
+    <!-- ***** Contact Us End ***** -->
+
+    
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <p class="copyright">Copyright &copy; 2020 Art Factory Company 
+                
+                . Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- jQuery -->
+    <script src="~/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/scrollreveal.min.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/imgfix.min.js"></script> 
+    
+    <!-- Global Init -->
+    <script src="~/js/custom.js"></script>
+
+  </body>
+</html>
