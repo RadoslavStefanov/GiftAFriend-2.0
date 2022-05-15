@@ -7,7 +7,6 @@ namespace GAF.Infrastructure.Data.Models
         public string UserId { get; set; }
         public int MobileNumber { get; set; }
         public decimal GiftTokens { get; set; }
-        public decimal Money { get; set; }
         public string Address { get; set; }
     }
 }

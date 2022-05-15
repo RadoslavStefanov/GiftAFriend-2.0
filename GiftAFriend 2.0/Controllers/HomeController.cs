@@ -1,4 +1,5 @@
 ﻿using GiftAFriend_2._0.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,6 +8,7 @@ namespace GiftAFriend_2._0.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private UserManager<IdentityUser> userManager;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -18,7 +20,7 @@ namespace GiftAFriend_2._0.Controllers
             return View();
         }
 
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
             //GuardAgainstUnknown
             return View();

@@ -11,6 +11,7 @@ builder.Services.AddDbContext<GAFDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GAFDbContext>();
 builder.Services.AddControllersWithViews();
 
