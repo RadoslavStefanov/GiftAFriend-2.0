@@ -1,3 +1,5 @@
+using GAF.Core.Services;
+using GAF.Core.Statics;
 using GAF.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GAFDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<UsersService>();
+builder.Services.AddTransient<Guard>();
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GAF.Infrastructure.Data
 {
-    public class GAFDbContext : IdentityDbContext
+    public class GAFDbContext : IdentityDbContext 
     {
         public GAFDbContext(DbContextOptions options) : base(options)
         {
