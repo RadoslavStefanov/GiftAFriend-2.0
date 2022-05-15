@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/adminLTE/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="~/adminLTE/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="~/css/layout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -37,7 +38,7 @@
                     <a class="btn btn-info" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item" style="margin-left:10px;">
-                    <a class="btn btn-danger"><i class="fas fa-gift"></i> 0.00 pc.</a>
+                    <a class="btn btn-danger"><i class="fas fa-gift"></i> @ViewBag.userTokens pc</a>
                 </li>
             </ul>
 
@@ -71,7 +72,7 @@
                             <a href="/Users/MyWallet" class="nav-link">
                                 <i class="nav-icon fas fa-wallet"></i>
                                 <p>Wallet</p>
-                                <span class="badge badge-info right">!</span>
+                                <span id="wallet" class="badge badge-info right">!</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -85,7 +86,7 @@
                             <a href="/Users/MySettings" class="nav-link">
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>Account settings</p>
-                                <span class="badge badge-info right">!</span>
+                                <span id="accountSettings" class="badge badge-info right">!</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -189,6 +190,7 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/adminLTE/plugins/chart.js/Chart.min.js"></script>
     <script src="~/adminLTE/plugins/sparklines/sparkline.js"></script>
@@ -201,6 +203,11 @@
     <script src="~/adminLTE/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="~/adminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="~/adminLTE/js/adminlte.js"></script>
-    <script src="~/adminLTE/js/pages/dashboard.js"></script>
+    <script src="~/js/notificationHandler.js"></script>
+
+    @if(ViewBag.ShowBonusMessage!=null)
+    {<script>toastr.info('@((ViewBag.ShowBonusMessage).ToString())')</script>}
+    @if (ViewBag.NotificationNodes != null)
+    {<script>drawNotifications('@ViewBag.NotificationNodes')</script>}
 </body>
 </html>

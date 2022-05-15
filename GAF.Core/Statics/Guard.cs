@@ -17,10 +17,11 @@ namespace GAF.Core.Statics
             usersService = _usersService;
         }
 
-        public async Task AgainstNullUserInfo(string userName)
+        public async Task<bool> AgainstNullUserInfo(string userName)
         {
             if (usersService.hasInfo(userName) == false)
-            { await usersService.generateInfo(userName); }
+            { await usersService.generateInfo(userName); return true; }
+            return false;
         }
     }
 }

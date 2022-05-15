@@ -53,4 +53,5 @@ a.nav-link {
 .badge-info {
     color: #fff;
     background-color: #dc3545 !important;
+    display:none;
 }

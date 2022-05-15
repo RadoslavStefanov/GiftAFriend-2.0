@@ -1,4 +1,5 @@
-﻿using GAF.Core.Statics;
+﻿using GAF.Core.Services;
+using GAF.Core.Statics;
 using GiftAFriend_2._0.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,17 +7,18 @@ using System.Diagnostics;
 
 namespace GiftAFriend_2._0.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private UserManager<IdentityUser> userManager;
-        private Guard Guard;
+        private UsersService usersService;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> _userManager, Guard _guard)
+
+        public HomeController(UserManager<IdentityUser> _userManager, UsersService _usersService,Guard _guard, ILogger<HomeController> logger) : base(_userManager, _usersService,_guard)
         {
             _logger = logger;
             userManager = _userManager;
-            Guard = _guard;
+            usersService = _usersService;
         }
 
         public IActionResult Index()
@@ -24,11 +26,9 @@ namespace GiftAFriend_2._0.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(string? messages)
         {
-            //GuardAgainstUnknown
-            //GuardAgainstNullUserInfo
-            await Guard.AgainstNullUserInfo(userManager.GetUserName(User));
+            ViewBag.Messages = messages;
             return View();
         }
 
