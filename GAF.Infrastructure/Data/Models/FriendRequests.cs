@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GAF.Infrastructure.Data.Models
 {
-    public class TransferEvents
+    public class FriendRequests
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,23 +14,8 @@ namespace GAF.Infrastructure.Data.Models
         public string SenderId { get; set; }
 
         [Required]
-        public string SenderName { get; set; }
-
-        [Required]
         public string RecieverId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(RecieverId))]
-        public IdentityUser Reciever { get; set; }
 
-        [Required]
-        public string RecieverName { get; set; }
-
-        [Required]
-        public DateTime DateTime { get; set; }
-
-
-        [Required]
-        public string Message { get; set; }
     }
 }

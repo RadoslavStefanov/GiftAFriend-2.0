@@ -49,3 +49,8 @@ a.nav-link {
 .nav-treeview .nav-link {
     width:80% !important;
 }
+
+.badge-info {
+    color: #fff;
+    background-color: #dc3545 !important;
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GAF.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GAF.Infrastructure.Data
@@ -14,5 +15,13 @@ namespace GAF.Infrastructure.Data
             if (!optionsBuilder.IsConfigured)
             { optionsBuilder.UseSqlServer("DefaultConnection"); }
         }
+
+
+        public DbSet<Emails> Emails { get; set; }
+        public DbSet<FriendRequests> FriendRequests { get; set; }
+        public DbSet<Friends> Friends { get; set; }
+        public DbSet<TransferEvents> TransferEvents { get; set; }
+        public DbSet<UserInfos> UserInfos { get; set; }
+
     }
 }

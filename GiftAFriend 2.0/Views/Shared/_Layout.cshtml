@@ -58,7 +58,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/adminLTE/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="~/img/defaultProfileImg.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a class="d-block">@userManager.GetUserName(User).Split("@")[0]</a>
@@ -68,32 +68,30 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="/Sales/CashRegister" class="nav-link">
+                            <a href="/Users/MyWallet" class="nav-link">
                                 <i class="nav-icon fas fa-wallet"></i>
                                 <p>Wallet</p>
+                                <span class="badge badge-info right">!</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/Sales/MySales" class="nav-link">
-                                <i class="nav-icon fas fa-money-bill-wave"></i>
-                                <p>My Transactions</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Products/Quantities" class="nav-link">
-                                <i class="nav-icon fas fa-cog"></i>
-                                <p>Account settings</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Products/Quantities" class="nav-link">
+                            <a href="/Gifts/Send" class="nav-link">
                                 <i class="nav-icon fas fa-hand-holding-heart"></i>
                                 <p>Send a gift</p>
+                                <span class="badge badge-info right">!</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Users/MySettings" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>Account settings</p>
+                                <span class="badge badge-info right">!</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
+                                <span class="badge badge-info right">!</span>
                                 <p>
                                     Friends
                                     <i class="fas fa-angle-left right"></i>
@@ -101,15 +99,17 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Products/ListProducts" class="nav-link">
+                                    <a href="/Users/MyFriends" class="nav-link">
                                         <i class="fas fa-address-book"></i>
                                         <p>My Friends</p>
+                                        <span class="badge badge-info right">!</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Products/Quantities" class="nav-link">
+                                    <a href="/Users/List" class="nav-link">
                                         <i class="fas fa-search-location"></i>
                                         <p>Find Friends</p>
+                                        <span class="badge badge-info right">!</span>
                                     </a>
                                 </li>
                             </ul>
@@ -120,6 +120,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
+                                <span class="badge badge-info right">!</span>
                                 <p>
                                     Users
                                     <i class="fas fa-angle-left right"></i>
@@ -127,29 +128,40 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Users/ListUsers" class="nav-link">
+                                    <a href="/Users/AdmUsersList" class="nav-link">
                                         <i class="fas fa-list-ol"></i>
                                         <p>Users list</p>
+                                        <span class="badge badge-info right">!</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Identity/Account/Register" class="nav-link">
+                                    <a href="/Users/Create" class="nav-link">
                                         <i class="fas fa-plus"></i>
                                         <p>Create user</p>
+                                        <span class="badge badge-info right">!</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Users/ResetRequests" class="nav-link">
                                         <i class="fas fa-redo"></i>
-                                        <p>Reset requests</p>
+                                        <p>Requests</p>
+                                        <span class="badge badge-info right">!</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/Products/Delivery" class="nav-link">
+                            <a href="/Users/AllTransactions" class="nav-link">
                                 <i class="nav-icon fas fa-luggage-cart"></i>
                                 <p>Transactions</p>
+                                <span class="badge badge-info right">!</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Contacts/CompanyMail" class="nav-link">
+                                <i class="nav-icon fas fa-mail-bulk"></i>
+                                <p>Mail</p>
+                                <span class="badge badge-info right">!</span>
                             </a>
                         </li>
                         }
