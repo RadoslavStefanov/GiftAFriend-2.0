@@ -53,5 +53,8 @@ a.nav-link {
 .badge-info {
     color: #fff;
     background-color: #dc3545 !important;
+}
+
+.os-host-overflow-x .badge-info {
     display:none;
 }
