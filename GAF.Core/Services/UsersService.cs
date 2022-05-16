@@ -1,4 +1,5 @@
-﻿using GAF.Infrastructure.Data;
+﻿using GAF.Core.Models;
+using GAF.Infrastructure.Data;
 using GAF.Infrastructure.Data.Models;
 
 namespace GAF.Core.Services
@@ -49,7 +50,7 @@ namespace GAF.Core.Services
             { result+= "-accountSettings"; }
 
             if (await hasFriendRequests(user))
-            { result+="-Friends>FriendRequest"; }
+            { result+="-friends-friendRequests"; }
 
             return result;
         }
@@ -65,6 +66,45 @@ namespace GAF.Core.Services
 
         private async Task<bool> hasFriendRequests(Microsoft.AspNetCore.Identity.IdentityUser user)
         {return repo.FriendRequests.Any(x => x.RecieverId == user.Id);}
+
+        public async Task<List<UserTransactionsModel>> getUserTransactions(string userName)
+        {
+            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
+            var result = new List<UserTransactionsModel>();
+            var userTransactions = repo.TransferEvents.Where(te => te.SenderId == user.Id || te.RecieverId==user.Id).ToList();
+
+            foreach (var item in userTransactions)
+            {
+
+                var type = "";
+                var fromToUser = "";
+                var fromToUserId = "";
+                if (item.SenderId == user.Id) 
+                { 
+                    type = "sent";
+                    fromToUser = repo.Users.FirstOrDefault(u => u.Id == item.RecieverId).UserName ?? "Unknown User";
+                    fromToUserId = repo.Users.FirstOrDefault(u => u.Id == item.RecieverId).Id ?? "Unknown User";
+                }
+                else 
+                { 
+                    type = "recieved";
+                    fromToUser = repo.Users.FirstOrDefault(u => u.Id == item.SenderId).UserName ?? "Unknown User";
+                    fromToUserId = repo.Users.FirstOrDefault(u => u.Id == item.SenderId).Id ?? "Unknown User";
+                }
+
+                result.Add(new UserTransactionsModel
+                {
+                    Id = item.Id,
+                    DateTime = item.DateTime,
+                    Type = type,
+                    FromToUser = fromToUser,
+                    FromToUserId = fromToUserId,
+                    Message = item.Message
+                });
+            }
+
+            return result;
+        }
     }
 }
 
