@@ -1,5 +1,18 @@
 # GiftAFriend
-ASP MVC app that is was assigned. This simple project aims to bring people together and keep them interacting with eachother in the form of gift/tokens.
+ASP MVC app that is was assigned for a dabble/sprint project. 
+The assignment:<br/>
+Create a WEB based system for sending of gifts in the form of online credits.
+It must have Register, Login and Dashboard pages.
+After registration in the system, every new user receives 100 credits automatically.
+Upon login, the user should be able to see how many credits they have available in their account and
+should be able to send credits to another user via filling the recipient’s mobile number (with which
+the recipient has been registered in the platform). When sending credits, the user must have the
+option to enter a message or write a wish in the form of a comment.
+Every user must be able to see all transactions made from and to them on their Dashboard.
+There must be one user with “Administrator” role, who, upon login, must be able to see all
+transactions on the Dashboard. The Administrator must also have access to a page with all registered
+users and their respective credits.
+<br/><br/>
 ![image](https://user-images.githubusercontent.com/72268734/168378437-35c3cabf-d745-4ba3-81c5-4e9b3e81e7c5.png)
 ![image](https://user-images.githubusercontent.com/72268734/168378507-e82cad9e-e4c5-4655-9aaa-75584fc73a3d.png)
 ![image](https://user-images.githubusercontent.com/72268734/168378542-92bee019-244a-4d67-b097-112f06d1f330.png)
