@@ -17,17 +17,20 @@ namespace GiftAFriend_2._0.Controllers
             usersService = _usersService;
             Guard = _guard;
         }
-        public override async void OnActionExecuting(ActionExecutingContext context)
+
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            base.OnActionExecuting(context);
             var userName = userManager.GetUserName(User);
 
             if (userName != null && await Guard.AgainstNullUserInfo(userName))
-            { ViewBag.ShowBonusMessage = "Hello and wellcome to GiftAFriend, to start you off we will award you with 100 GIFT Tokens! Enjoy your stay."; }
+            {
+                ViewBag.ShowBonusMessage = "Hello and wellcome to GiftAFriend, to start you off we will award you with 100 GIFT Tokens! Enjoy your stay.";
+                await usersService.giveNewUserBonus(userName);
+            }
 
             ViewBag.NotificationNodes = await usersService.getUserNotifications(userName);
             ViewBag.userTokens = await usersService.getUserTokens(userName);
-
+            await next();
         }
     }
 }

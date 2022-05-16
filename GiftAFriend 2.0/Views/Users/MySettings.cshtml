@@ -1,0 +1,64 @@
+﻿@using GAF.Core.Models
+@model UserInfosModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+
+<link rel="stylesheet" href="~/css/wallet.css">
+<section class="content" style="margin-top:20px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="/img/defaultProfileImg.png" alt="User profile picture">
+                        </div>
+                        <h3 class="profile-username text-center">@(userManager.GetUserName(User).Split("@")[0])'s</h3>
+                        <p class="text-muted text-center">Account Settings</p>
+                    </div>
+                </div>
+                <img class="walletArt" src="~/img/settingsIMG.jpg"/>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card" style="height: 20px;">
+
+                        <div class="card card-info" >
+                            <div class="card-header" style="background-color:#233862">
+                                <h3 class="card-title">Configure your profile</h3>
+                            </div>
+
+                            <form class="form-horizontal" method=post>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">User Id:</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control"  value="@Model.userId" disabled placeholder="User Id ...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPassword3" class="col-sm-2 col-form-label"><p style="color:red;display: contents;">*</p>Number:</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" value="@Model.MobileNumber" name="MobileNumber" placeholder="Phone number ...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Address:</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" value="@Model.Address" name="Address" placeholder="Personal address ...">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-info">Apply</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>alert("Once set the mobile number cannot be changed!")</script>

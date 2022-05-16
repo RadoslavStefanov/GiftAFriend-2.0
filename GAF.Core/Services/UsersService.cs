@@ -71,7 +71,7 @@ namespace GAF.Core.Services
         {
             var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
             var result = new List<UserTransactionsModel>();
-            var userTransactions = repo.TransferEvents.Where(te => te.SenderId == user.Id || te.RecieverId==user.Id).ToList();
+            var userTransactions = repo.TransferEvents.Where(te => te.SenderId == user.Id || te.RecieverId==user.Id).Take(20).ToList();
 
             foreach (var item in userTransactions)
             {
@@ -108,19 +108,25 @@ namespace GAF.Core.Services
 
         public async Task<string?> sendGift(string userName, GiftSendPostModel model)
         {
-            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
-            var recieverId = repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).UserId;
-            var userNumber = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).MobileNumber;
+                var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
 
-            if (userNumber == null) { return "error-You cannot send gifts until you provide personal mobile number!:"; }
-            if (recieverId == null) { return "error-Unknown MobileNumber!:"; }
-            if (!giftModelIsValid(model,user)) { return "error-Please fill the fields with the proper values!:"; }
-            return await registerGiftTransaction(model,user,recieverId);
+                if (repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber) == null) 
+                { return "error-Please fill the fields with the proper values!:"; }
+
+                var recieverId = repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).UserId;
+
+                var userNumber = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).MobileNumber;
+
+                if (userNumber == null) { return "error-You cannot send gifts until you provide personal mobile number!:"; }
+                if (recieverId == null) { return "error-Unknown MobileNumber!:"; }
+                if (!giftModelIsValid(model, user)) { return "error-Please fill the fields with the proper values!:"; }
+                return await registerGiftTransaction(model, user, recieverId);
+            
         }
 
         private bool giftModelIsValid(GiftSendPostModel model, Microsoft.AspNetCore.Identity.IdentityUser user)
         {
-            var userTokens = repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).GiftTokens;
+            var userTokens = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).GiftTokens;
             if (model.Amount > userTokens) { return false; }
             if (model.Amount == 0) { return false; }
             return true;
@@ -150,6 +156,58 @@ namespace GAF.Core.Services
             catch (Exception)
             { return "error-Something went wrong! Please try again later!"; }
             
+        }
+
+        public async Task<UserInfosModel?> getUserSettings(string userName)
+        {
+            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
+            var userInfo = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id);
+            return new UserInfosModel
+            {
+                userId = user.Id,
+                MobileNumber = userInfo.MobileNumber,
+                Address = userInfo.Address
+            };
+        }
+
+        public async Task<string?> applyUserSettings(string userName,UserInfosModel model)
+        {
+            var result = "";
+            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
+            var userInfo = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id);
+            if (userInfo.Address == model.Address && userInfo.MobileNumber == model.MobileNumber)
+            { return "error-No changes detected!:"; }
+
+            if (userInfo.Address != model.Address)
+            {
+                userInfo.Address = model.Address;
+                await repo.SaveChangesAsync();
+                result += "success-Successfuly changed address!:";
+            }
+
+            if (userInfo.MobileNumber == null && model.MobileNumber != null)
+            {
+                if (repo.UserInfos.Any(x => x.MobileNumber == model.MobileNumber))
+                { result += "error-This number already exists!:"; }
+                else
+                {
+                    userInfo.MobileNumber = model.MobileNumber;
+                    await repo.SaveChangesAsync();
+                    result += "success-Successfuly changed numer!:";
+                }
+            }
+
+            if (userInfo.MobileNumber != null && model.MobileNumber != userInfo.MobileNumber)
+            {result += "error-You cannot change your number, once set!:";}
+
+            return result;
+        }
+
+        public async Task giveNewUserBonus(string userName)
+        {
+            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
+            repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).GiftTokens += 100 ;
+            await repo.SaveChangesAsync();
         }
     }
 }
