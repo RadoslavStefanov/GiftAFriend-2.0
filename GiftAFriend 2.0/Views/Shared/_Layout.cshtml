@@ -192,10 +192,13 @@
     <script src="~/adminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="~/adminLTE/js/adminlte.js"></script>
     <script src="~/js/notificationHandler.js"></script>
+    <script src="~/js/printToastr.js"></script>
 
     @if(ViewBag.ShowBonusMessage!=null)
     {<script>toastr.info('@((ViewBag.ShowBonusMessage).ToString())')</script>}
     @if (ViewBag.NotificationNodes != null)
     {<script>drawNotifications('@ViewBag.NotificationNodes')</script>}
+    @if (ViewBag.ToastrCommands != null)
+    {<script>printToastr('@ViewBag.ToastrCommands')</script>}
 </body>
 </html>

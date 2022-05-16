@@ -103,7 +103,53 @@ namespace GAF.Core.Services
                 });
             }
 
-            return result;
+            return result.OrderBy(x=>x.DateTime).ToList();
+        }
+
+        public async Task<string?> sendGift(string userName, GiftSendPostModel model)
+        {
+            var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
+            var recieverId = repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).UserId;
+            var userNumber = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).MobileNumber;
+
+            if (userNumber == null) { return "error-You cannot send gifts until you provide personal mobile number!:"; }
+            if (recieverId == null) { return "error-Unknown MobileNumber!:"; }
+            if (!giftModelIsValid(model,user)) { return "error-Please fill the fields with the proper values!:"; }
+            return await registerGiftTransaction(model,user,recieverId);
+        }
+
+        private bool giftModelIsValid(GiftSendPostModel model, Microsoft.AspNetCore.Identity.IdentityUser user)
+        {
+            var userTokens = repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).GiftTokens;
+            if (model.Amount > userTokens) { return false; }
+            if (model.Amount == 0) { return false; }
+            return true;
+        }
+
+        private async Task<string?> registerGiftTransaction(GiftSendPostModel model, Microsoft.AspNetCore.Identity.IdentityUser user, string recieverId)
+        {
+            try
+            {
+                var reciever = repo.Users.FirstOrDefault(x => x.Id == recieverId);
+
+                var senderTokens = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).GiftTokens-=model.Amount;
+                var recieverTokens = repo.UserInfos.FirstOrDefault(x => x.UserId == reciever.Id).GiftTokens += model.Amount;
+
+                await repo.TransferEvents.AddAsync(new TransferEvents
+                {
+                    RecieverId = reciever.Id,
+                    RecieverName = reciever.UserName,
+                    SenderId = user.Id,
+                    SenderName = user.UserName,
+                    DateTime = DateTime.UtcNow,
+                    Message = model.Message ?? "No message was added."
+                });
+                await repo.SaveChangesAsync();
+                return "success-Gift successfully sent!";
+            }
+            catch (Exception)
+            { return "error-Something went wrong! Please try again later!"; }
+            
         }
     }
 }
