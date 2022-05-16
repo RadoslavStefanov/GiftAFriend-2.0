@@ -6,9 +6,13 @@ ASP MVC app that is was assigned. This simple project aims to bring people toget
 ![image](https://user-images.githubusercontent.com/72268734/168378577-5f6489ac-5820-4eb7-b765-14bdbba3b614.png)
 ![image](https://user-images.githubusercontent.com/72268734/168378606-6e2ac7c1-05bc-4616-8cf5-92691072968c.png)
 ![image](https://user-images.githubusercontent.com/72268734/168418280-089696be-7c8a-4778-ac7b-050179c2b641.png)
-![image](https://user-images.githubusercontent.com/72268734/168423811-97fc97ed-048d-457b-bccd-8aa494ff8864.png)
 ![image](https://user-images.githubusercontent.com/72268734/168467882-a8f60628-8ce8-4d67-93a2-f6a81c5c25d0.png)
 ![image](https://user-images.githubusercontent.com/72268734/168654599-d760e25e-c3b0-4fa6-abd2-55172eb5926a.png)
+![image](https://user-images.githubusercontent.com/72268734/168686138-7abf6975-ce5d-4686-8ea7-59495aa1146b.png)
+![image](https://user-images.githubusercontent.com/72268734/168686214-834ad841-362c-4eaa-8399-6d27ccbf03a1.png)
+
+
+![image](https://user-images.githubusercontent.com/72268734/168423811-97fc97ed-048d-457b-bccd-8aa494ff8864.png)
 
 
 Images: https://www.freepik.com/<br />
