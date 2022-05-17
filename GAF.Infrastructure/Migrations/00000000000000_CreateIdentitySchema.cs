@@ -218,6 +218,7 @@ namespace GiftAFriend_2._0.Data.Migrations
             sb.AppendLine(")");
 
             migrationBuilder.Sql(sb.ToString());
+            migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{User_Role_Guid}','User','User')");
             migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{Admin_Role_Guid}','Admin','ADMIN')");
             migrationBuilder.Sql($"INSERT INTO AspNetUserRoles (UserId, RoleId) VALUES ('{Admin_User_Guid}','{Admin_Role_Guid}')");
 

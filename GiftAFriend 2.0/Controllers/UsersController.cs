@@ -1,6 +1,7 @@
 ﻿using GAF.Core.Models;
 using GAF.Core.Services;
 using GAF.Core.Statics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,12 @@ namespace GiftAFriend_2._0.Controllers
             userManager = _userManager;
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MyWallet()
-        {return View(await usersService.getUserTransactions(userManager.GetUserName(User)));}
+        {return View(await usersService.getUserTransactions(userManager.GetUserName(User))); }
 
+
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MySettings(string? toastrCommands)
         {
             ViewBag.ToastrCommands = toastrCommands;
@@ -27,10 +31,9 @@ namespace GiftAFriend_2._0.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MySettings(UserInfosModel model)
-        {
-            return Redirect($"/Users/MySettings?toastrCommands={await usersService.applyUserSettings(userManager.GetUserName(User), model)}");
-        }
+        { return Redirect($"/Users/MySettings?toastrCommands={await usersService.applyUserSettings(userManager.GetUserName(User), model)}"); }
 
     }
 }

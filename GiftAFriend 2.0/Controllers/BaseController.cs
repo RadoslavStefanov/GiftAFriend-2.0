@@ -26,6 +26,7 @@ namespace GiftAFriend_2._0.Controllers
             {
                 ViewBag.ShowBonusMessage = "Hello and wellcome to GiftAFriend, to start you off we will award you with 100 GIFT Tokens! Enjoy your stay.";
                 await usersService.giveNewUserBonus(userName);
+                await userManager.AddToRoleAsync(await userManager.GetUserAsync(User), "User");
             }
 
             ViewBag.NotificationNodes = await usersService.getUserNotifications(userName);

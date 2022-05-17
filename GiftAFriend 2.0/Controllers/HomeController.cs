@@ -1,6 +1,7 @@
 ﻿using GAF.Core.Services;
 using GAF.Core.Statics;
 using GiftAFriend_2._0.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -22,25 +23,25 @@ namespace GiftAFriend_2._0.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
+        { return View();}
 
+
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Dashboard(string? messages)
         {
             ViewBag.Messages = messages;
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Authorize(Roles = "User")]
+        public IActionResult Privacy()
+        { return View();}
+
+
+
+        [Authorize(Roles = "User")]
         public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        {return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });}
     }
 }

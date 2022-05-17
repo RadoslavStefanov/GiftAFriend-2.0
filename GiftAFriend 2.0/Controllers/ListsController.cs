@@ -1,5 +1,6 @@
 ﻿using GAF.Core.Services;
 using GAF.Core.Statics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +17,13 @@ namespace GiftAFriend_2._0.Controllers
             transactionsService = _transactionsService;
             usersService = _usersService;
         }
-        
 
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AllTransactionsList()
         {return View(await transactionsService.getAllTransactions());}
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AllUsersList()
         { return View(await usersService.getAllUsers()); }
     }

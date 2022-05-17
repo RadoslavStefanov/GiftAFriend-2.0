@@ -1,6 +1,7 @@
 ﻿using GAF.Core.Models;
 using GAF.Core.Services;
 using GAF.Core.Statics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace GiftAFriend_2._0.Controllers
             usersService = _usersService;
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Send(string toastrCommands)
         {
             ViewBag.ToastrCommands = toastrCommands;
@@ -23,6 +25,7 @@ namespace GiftAFriend_2._0.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Send(GiftSendPostModel model)
         {
             //return View(await usersService.sendGift(userManager.GetUserName(User),model));
