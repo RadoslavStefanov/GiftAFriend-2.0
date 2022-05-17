@@ -99,11 +99,12 @@ namespace GAF.Core.Services
                     Type = type,
                     FromToUser = fromToUser,
                     FromToUserId = fromToUserId,
-                    Message = item.Message
+                    Message = item.Message,
+                    Amount = item.Amount,
                 });
             }
 
-            return result.OrderBy(x=>x.DateTime).ToList();
+            return result.OrderByDescending(x=>x.DateTime).ToList();
         }
 
         public async Task<string?> sendGift(string userName, GiftSendPostModel model)
@@ -117,6 +118,8 @@ namespace GAF.Core.Services
 
                 var userNumber = repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).MobileNumber;
 
+                if (userNumber == repo.UserInfos.FirstOrDefault(x => x.MobileNumber == model.PhoneNumber).MobileNumber)
+                { return "error-You can't send gifts to yourself!:"; }
                 if (userNumber == null) { return "error-You cannot send gifts until you provide personal mobile number!:"; }
                 if (recieverId == null) { return "error-Unknown MobileNumber!:"; }
                 if (!giftModelIsValid(model, user)) { return "error-Please fill the fields with the proper values!:"; }
@@ -148,7 +151,9 @@ namespace GAF.Core.Services
                     SenderId = user.Id,
                     SenderName = user.UserName,
                     DateTime = DateTime.UtcNow,
-                    Message = model.Message ?? "No message was added."
+                    Message = model.Message ?? "No message was added.",
+                    Amount = model.Amount
+
                 });
                 await repo.SaveChangesAsync();
                 return "success-Gift successfully sent!";
@@ -208,6 +213,26 @@ namespace GAF.Core.Services
             var user = repo.Users.FirstOrDefault(x => x.UserName == userName);
             repo.UserInfos.FirstOrDefault(x => x.UserId == user.Id).GiftTokens += 100 ;
             await repo.SaveChangesAsync();
+        }
+
+        public async Task<List<UsersModel>> getAllUsers()
+        {
+            var allUsers = repo.Users.Join(
+                repo.UserInfos, 
+                user=>user.Id,
+                userInfo=>userInfo.UserId,
+                (user,userInfo)=> new UsersModel
+                    { 
+                        UserId = user.Id,
+                        Username = user.UserName,
+                        Number = userInfo.MobileNumber,
+                        Address = userInfo.Address,
+                        GiftTokens = userInfo.GiftTokens
+                    }
+                ).ToList();
+
+
+            return allUsers;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace GAF.Core.Models
         public string FromToUser { get; set; }
         public string FromToUserId { get; set; }
         public string Message { get; set; }
+        public decimal Amount { get; set; }
 
     }
 }

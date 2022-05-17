@@ -1,0 +1,56 @@
+﻿@using GAF.Core.Models
+@model IEnumerable<AllUserTransactionsModel>
+
+<link rel="stylesheet" href="~/css/wallet.css">
+<section class="content" style="margin-top:20px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="/img/allUsers.jpg" alt="User profile picture">
+                        </div>
+                        <h3 class="profile-username text-center">GiftAFriend's</h3>
+                        <p class="text-muted text-center">Global transactions history</p>
+                    </div>
+                </div>
+                <img class="walletArt" src="~/img/transactionsListImg.jpg" />
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Transactions</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var t in Model)
+                                {
+                                    <tr>
+                                        <td>@t.senderUserName</td>
+                                        <td>@t.recieverUserName</td>
+                                        <td><p>@t.Amount pc</p></td>
+                                        <td id="dateTime">@t.DateTime</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

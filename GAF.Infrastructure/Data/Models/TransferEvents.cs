@@ -29,8 +29,12 @@ namespace GAF.Infrastructure.Data.Models
         [Required]
         public DateTime DateTime { get; set; }
 
-
         [Required]
         public string Message { get; set; }
+
+        [Required]
+        [Range(minimum: 0, maximum: double.MaxValue)]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Amount { get; set; }
     }
 }
